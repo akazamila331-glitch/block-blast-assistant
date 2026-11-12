@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0f1220">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Assistant BB">
+<meta name="description" content="Assistant Block Blast : capture ta partie du VRAI jeu et découvre le meilleur coup. Installable sur iOS.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="stylesheet" href="style.css">
+<title>Assistant Block Blast</title>
+</head>
+<body>
+
+<header class="hud">
+  <div class="logo">🧠 ASSISTANT<br><span>pour le VRAI Block Blast</span></div>
+  <button id="btn-install" class="tool tool-accent install-btn">📱</button>
+</header>
+
+<p class="intro">Capture ta partie → je lis la grille → je te montre <b>le meilleur coup en vert</b>. Tu joues au vrai jeu, je fais le calcul.</p>
+
+<!-- ============ 1. SCREENSHOT ============ -->
+<section class="step" id="step-pick">
+  <div class="step-title"><span class="num">1</span> Capture ton écran</div>
+  <p class="hint">En jeu, appuie sur <b>volume haut + bouton latéral</b> (iPhone) pour faire un screenshot, puis choisis-le ici.</p>
+  <div class="btn-row">
+    <button id="btn-pick" class="big-btn">📸 Choisir le screenshot</button>
+  </div>
+  <input type="file" id="file-input" accept="image/*" hidden>
+  <div class="btn-row">
+    <button id="btn-manual" class="ghost-btn">✏️ Ou saisie manuelle (sans photo)</button>
+  </div>
+</section>
+
+<!-- ============ 2. CADRAGE ============ -->
+<section class="step hidden" id="step-align">
+  <div class="step-title"><span class="num">2</span> Cadre la grille 8×8</div>
+  <p class="hint">Glisse les <b>coins</b> du cadre pour qu'il couvre exactement la grille du jeu.</p>
+  <div id="stage">
+    <canvas id="cv"></canvas>
+    <div id="frame">
+      <div class="fh" id="h-tl"></div>
+      <div class="fh" id="h-br"></div>
+      <div class="grid-lines"></div>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button id="btn-reframe" class="ghost-btn">🎯 Recentrer</button>
+    <button id="btn-shoot" class="big-btn">✅ Cadré !</button>
+  </div>
+</section>
+
+<!-- ============ 3. GRILLE + PIECES + COUP ============ -->
+<section class="step hidden" id="step-play">
+  <div class="step-title"><span class="num">3</span> Vérifie la grille</div>
+  <p class="hint">J'ai lu ces cases. <b>Tap sur une case</b> pour corriger si j'ai me-raté quelque chose.</p>
+  <div id="board" class="board"></div>
+
+  <div class="btn-row small">
+    <button id="btn-clear" class="ghost-btn">🗑 Tout vider</button>
+  </div>
+
+  <div class="step-title"><span class="num">4</span> Choisis tes 3 pièces</div>
+  <p class="hint">Tap les <b>3 pièces</b> de ta réserve (elles apparaissent ici).</p>
+  <div id="slots" class="tray">
+    <div class="slot" data-i="0"></div>
+    <div class="slot" data-i="1"></div>
+    <div class="slot" data-i="2"></div>
+  </div>
+
+  <div id="palette" class="palette"></div>
+
+  <button id="btn-solve" class="mega-btn">🤖 MEILLEUR COUP</button>
+
+  <div id="result" class="result hidden"></div>
+</section>
+
+<!-- ============ INFOS / INSTALL ============ -->
+<section class="about">
+  <div class="step-title">📱 L'installer sur ton écran d'accueil</div>
+  <p class="hint">Ouvre ce site dans <b>Safari</b>, tape <b>⬆ Partager</b>, puis <b>« Sur l'écran d'accueil »</b>. L'assistant marche <b>hors connexion</b>.</p>
+  <p class="tiny">Aucune donnée envoyée : tout est calculé dans ton téléphone. Non affilié à Hungry Studio — outil d'aide externe.</p>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
